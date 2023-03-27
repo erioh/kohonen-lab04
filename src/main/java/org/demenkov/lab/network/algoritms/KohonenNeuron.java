@@ -5,7 +5,7 @@ import java.util.Arrays;
 import static org.demenkov.lab.network.math.VectorMathOperation.*;
 
 public class KohonenNeuron {
-    private static final double ALPHA = .01;
+    private static final double ALPHA = .1;
     private final int index;
     private double[] weight;
 
@@ -16,11 +16,11 @@ public class KohonenNeuron {
     }
 
     public double calculate(double[] vector) {
-        double dist = 0;
+        double sum = 0;
         for (int i = 0; i < vector.length; i++) {
-            dist += Math.pow(vector[i] - weight[i], 2);
+            sum+=vector[i]*weight[i];
         }
-        return dist;
+        return sum;
     }
 
     public double[] getWeight() {
