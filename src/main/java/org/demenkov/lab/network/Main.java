@@ -25,6 +25,6 @@ public class Main {
         }
         KohonenAlgorithm algorithm = new KohonenAlgorithm();
 
-        algorithm.learn(data, 2, 10000);
+        algorithm.learn(data, 5, 10000);
     }
 }
