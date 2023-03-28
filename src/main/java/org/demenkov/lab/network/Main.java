@@ -1,6 +1,6 @@
 package org.demenkov.lab.network;
 
-import org.demenkov.lab.network.algoritms.KohonenAlgorithm;
+import org.demenkov.lab.network.algorithms.KohonenAlgorithm;
 
 import java.io.IOException;
 

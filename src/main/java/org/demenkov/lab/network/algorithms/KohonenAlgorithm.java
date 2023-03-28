@@ -1,4 +1,4 @@
-package org.demenkov.lab.network.algoritms;
+package org.demenkov.lab.network.algorithms;
 
 import java.io.IOException;
 import java.util.*;
