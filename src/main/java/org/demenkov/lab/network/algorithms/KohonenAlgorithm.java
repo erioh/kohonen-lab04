@@ -58,7 +58,7 @@ public class KohonenAlgorithm {
         }
         for (double[] vector : data) {
             KohonenNeuron currentWinner = kohonenNeurons.stream()
-                    .map(kohonenNeuron -> new AbstractMap.SimpleEntry<>(kohonenNeuron.calculate(vector), kohonenNeuron))
+                    .map(kohonenNeuron -> new AbstractMap.SimpleEntry<>(kohonenNeuron.calculate(normalize(vector)), kohonenNeuron))
                     .max(Comparator.comparingDouble(AbstractMap.SimpleEntry::getKey))
                     .orElseThrow(() -> new IllegalArgumentException("Something went wrong"))
                     .getValue();
@@ -72,13 +72,14 @@ public class KohonenAlgorithm {
     }
 
     private double[] normalize(double[] input) {
-        double summX = 0;
+        double vectorLength = 0;
         double[] output = new double[input.length];
-        for (double v : input) {
-            summX += v;
+        for (double value : input) {
+            vectorLength += value * value;
         }
+        vectorLength = Math.sqrt(vectorLength);
         for (int i = 0; i < input.length; i++) {
-            output[i] = input[i] / summX;
+            output[i] = input[i] / vectorLength;
         }
         return output;
     }
