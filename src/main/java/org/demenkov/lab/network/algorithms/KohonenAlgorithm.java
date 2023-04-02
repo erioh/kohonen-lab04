@@ -23,9 +23,16 @@ public class KohonenAlgorithm {
         for (int index = 0; index < numberOfNeurons; index++) {
             kohonenNeurons.add(new KohonenNeuron(index, length));
         }
-        boolean weightWasAdjusted = false;
+        boolean weightWasAdjusted;
         long tick = 0;
         do {
+            if (coefficient < 1) {
+                coefficient += INCREMENT;
+                if (coefficient > 1) {
+                    coefficient = 1;
+                }
+            }
+            weightWasAdjusted = false;
             for (double[] vector : data) {
                 double[] stepVector = getStepVector(vector);
                 KohonenNeuron currentWinner = kohonenNeurons.stream()
@@ -39,10 +46,7 @@ public class KohonenAlgorithm {
                 }
             }
             tick++;
-            if (coefficient < 1) {
-                coefficient += INCREMENT;
-            }
-        } while ((weightWasAdjusted || coefficient < 1) && epochs > tick);
+        } while ((weightWasAdjusted || coefficient != 1) && epochs > tick);
 
         double[][] toBePersisted = kohonenNeurons.stream()
                 .map(KohonenNeuron::getWeight)

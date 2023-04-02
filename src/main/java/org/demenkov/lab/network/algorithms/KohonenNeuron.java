@@ -28,6 +28,7 @@ public class KohonenNeuron {
             sum += vector[i] * weight[i];
         }
         return sum;
+
     }
 
     public double[] getWeight() {
