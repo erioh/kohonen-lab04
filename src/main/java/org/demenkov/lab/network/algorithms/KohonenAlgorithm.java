@@ -19,11 +19,9 @@ public class KohonenAlgorithm {
 
     public void learn(double[][] data, int numberOfNeurons, long epochs) throws IOException {
         int length = data[0].length;
-        double[] initWeight = new double[length];
-        Arrays.fill(initWeight, 1 / Math.sqrt(length));
         List<KohonenNeuron> kohonenNeurons = new ArrayList<>();
         for (int index = 0; index < numberOfNeurons; index++) {
-            kohonenNeurons.add(new KohonenNeuron(index, initWeight));
+            kohonenNeurons.add(new KohonenNeuron(index, length));
         }
         boolean weightWasAdjusted = false;
         long tick = 0;

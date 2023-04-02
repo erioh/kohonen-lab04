@@ -10,15 +10,22 @@ public class KohonenNeuron {
     private double[] weight;
 
 
-    public KohonenNeuron(int index, double[] initWeight) {
+    public KohonenNeuron(int index, int length) {
         this.index = index;
-        weight = Arrays.copyOf(initWeight, initWeight.length);
+        double[] initWeight = new double[length];
+        Arrays.fill(initWeight, 1 / Math.sqrt(length));
+        weight = initWeight;
+    }
+
+    public KohonenNeuron(int index, double[] weight) {
+        this.index = index;
+        this.weight = weight;
     }
 
     public double calculate(double[] vector) {
         double sum = 0;
         for (int i = 0; i < vector.length; i++) {
-            sum+=vector[i]*weight[i];
+            sum += vector[i] * weight[i];
         }
         return sum;
     }
@@ -28,7 +35,7 @@ public class KohonenNeuron {
     }
 
     public boolean adjustWeight(double[] vector) {
-        if (Arrays.equals(weight,vector)) {
+        if (Arrays.equals(weight, vector)) {
             return false;
         }
         weight = plus(weight, multiply(minus(vector, weight), ALPHA));
