@@ -27,7 +27,7 @@ public class KohonenAlgorithm {
         long tick = 0;
         do {
             for (double[] vector : data) {
-                double[] stepVector = getStepVector(normalize(vector));
+                double[] stepVector = getStepVector(vector);
                 KohonenNeuron currentWinner = kohonenNeurons.stream()
                         .map(kohonenNeuron -> new AbstractMap.SimpleEntry<>(kohonenNeuron.calculate(stepVector), kohonenNeuron))
                         .max(Comparator.comparingDouble(AbstractMap.SimpleEntry::getKey))
@@ -67,7 +67,8 @@ public class KohonenAlgorithm {
     }
 
     private double[] getStepVector(double[] vector) {
-        return plus(multiply(vector, coefficient), (1 - coefficient) / Math.sqrt(vector.length));
+        double[] normalizedVector = normalize(vector);
+        return plus(multiply(normalizedVector, coefficient), (1 - coefficient) / Math.sqrt(normalizedVector.length));
     }
 
     private double[] normalize(double[] input) {
